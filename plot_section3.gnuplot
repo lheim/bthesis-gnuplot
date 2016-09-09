@@ -24,6 +24,7 @@ file = '../benchmark_log_1machine_4usrp/bench6_nolimit_export_v4.csv'
 
 
 
+set xrange [0:12]
 
 
 # received samples
