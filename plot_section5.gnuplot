@@ -87,13 +87,32 @@ plot two_container_file1 using 1:31:32 with yerrorbars title 'Machine 1' ps 2, \
 
 
 
+
 #dropped samples
 
 set title 'dropped'
 set ylabel 'dropped samples'
 set output '../plots/section5/dropped.eps'
 
-plot two_container_file1 using 1:5:6 with yerrorbars title 'Machine 1' ps 2, \
-  two_container_file2 using 1:5:6 with yerrorbars title 'Machine 2' ps 2
+plot two_container_file1 using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title 'First Container Machine 1' ps 2, \
+  two_container_file1 using 1:"uhd_dropped 2 mean":"uhd_dropped 2 std" with yerrorbars title 'Second Container Machine 1' ps 2, \
+  two_container_file2 using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title 'Third Container Machine 2' ps 2, \
+  two_container_file2 using 1:"uhd_dropped 2 mean":"uhd_dropped 2 std" with yerrorbars title 'Fourth Container Machine 2' ps 2
 ! epstopdf ../plots/section5/dropped.eps
 ! rm ../plots/section5/dropped.eps
+
+
+
+
+#underflows samples
+
+set title 'underflows'
+set ylabel 'underflows samples'
+set output '../plots/section5/underflows.eps'
+
+plot two_container_file1 using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title 'First Container Machine 1' ps 2, \
+  two_container_file1 using 1:"uhd_underflows 2 mean":"uhd_underflows 2 std" with yerrorbars title 'Second Container Machine 1' ps 2, \
+  two_container_file2 using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title 'Third Container Machine 2' ps 2, \
+  two_container_file2 using 1:"uhd_underflows 2 mean":"uhd_underflows 2 std" with yerrorbars title 'Fourth Container Machine 2' ps 2
+! epstopdf ../plots/section5/underflows.eps
+! rm ../plots/section5/underflows.eps
