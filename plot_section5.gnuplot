@@ -49,7 +49,7 @@ set title 'transmitted'
 set ylabel 'transmitted samples'
 set output '../plots/section5/transmitted.eps'
 
-plot two_container_file1 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'First Container Machine 1' ps 2, \
+plot two_container_file1 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'First Container Machine 1' ps 2, \
   two_container_file1 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Second Container Machine 1' ps 2, \
   two_container_file2 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'Third Container Machine 2' ps 2, \
   two_container_file2 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Fourth Container Machine 2' ps 2

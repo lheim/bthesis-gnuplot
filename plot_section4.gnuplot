@@ -66,8 +66,8 @@ set title 'ethernet transmit'
 set ylabel 'ethernet transmit [Mbit/s]'
 set output '../plots/section4_v2/eth_tx.eps'
 
-plot two_container_file1 using 1:33:34 with yerrorbars title 'Machine 1'ps 2, \
-  two_container_file2 using 1:33:34 with yerrorbars title 'Machine 2' ps 2
+plot two_container_file1 using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title 'Machine 1'ps 2, \
+  two_container_file2 using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title 'Machine 2' ps 2
 
   ! epstopdf ../plots/section4_v2/eth_tx.eps
   ! rm ../plots/section4_v2/eth_tx.eps
@@ -78,8 +78,8 @@ set title 'ethernet received'
 set ylabel 'ethernet received [Mbit/s]'
 set output '../plots/section4_v2/eth_rx.eps'
 
-plot two_container_file2 using 1:31:32 with yerrorbars title 'Machine 1' ps 2, \
-  two_container_file2 using 1:31:32 with yerrorbars title 'Machine 2' ps 2
+plot two_container_file2 using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title 'Machine 1' ps 2, \
+  two_container_file2 using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title 'Machine 2' ps 2
 
 ! epstopdf ../plots/section4_v2/eth_rx.eps
 ! rm ../plots/section4_v2/eth_rx.eps
@@ -96,3 +96,32 @@ plot two_container_file1 using 1:25:26 with yerrorbars title 'Machine 1' ps 2, \
 
 ! epstopdf ../plots/section4_v2/load_diff.eps
 ! rm ../plots/section4_v2/load_diff.eps
+
+
+
+#dropped samples
+set title 'dropped'
+set ylabel 'dropped samples'
+set output '../plots/section4_v2/dropped.eps'
+
+plot two_container_file1 using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title 'First Container Machine 1' ps 2, \
+  two_container_file2 using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title 'Second Container Machine 2' ps 2, \
+
+
+
+! epstopdf ../plots/section4_v2/dropped.eps
+! rm ../plots/section4_v2/dropped.eps
+
+
+#underflows samples
+set title 'underflows'
+set ylabel 'underflows samples'
+set output '../plots/section4_v2/underflows.eps'
+
+plot two_container_file1 using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title 'First Container Machine 1' ps 2, \
+  two_container_file2 using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title 'Second Container Machine 2' ps 2, \
+
+
+
+! epstopdf ../plots/section4_v2/underflows.eps
+! rm ../plots/section4_v2/underflows.eps

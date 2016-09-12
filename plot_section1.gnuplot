@@ -31,8 +31,8 @@ set title 'received v1'
 set ylabel 'received samples'
 set output '../plots/section1_v2/received.eps'
 
-plot container_file using 1:3:4 with yerrorbars title container ps 2, \
-  baremetal_file using 1:3:4 with yerrorbars title baremetal ps 2
+plot container_file using 1:"uhd_received mean":"uhd_received std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"uhd_received mean":"uhd_received std" with yerrorbars title baremetal ps 2
 
 
 ! epstopdf ../plots/section1_v2/received.eps
@@ -43,8 +43,8 @@ set title 'transmitted'
 set ylabel 'transmitted samples'
 set output '../plots/section1_v2/transmitted.eps'
 
-plot container_file using 1:9:10 with yerrorbars title container ps 2, \
-  baremetal_file using 1:9:10 with yerrorbars title baremetal ps 2
+plot container_file using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title baremetal ps 2
 
 ! epstopdf ../plots/section1_v2/transmitted.eps
 ! rm ../plots/section1_v2/transmitted.eps
@@ -55,8 +55,8 @@ set title 'load difference'
 set ylabel 'load difference'
 set output '../plots/section1_v2/load_diff.eps'
 
-plot container_file using 1:25:26 with yerrorbars title container ps 2, \
-  baremetal_file using 1:25:26 with yerrorbars title baremetal ps 2
+plot container_file using 1:"load_diff mean":"load_diff std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"load_diff mean":"load_diff std" with yerrorbars title baremetal ps 2
 
 
 ! epstopdf ../plots/section1_v2/load_diff.eps
@@ -67,8 +67,8 @@ set title 'ethernet transmit'
 set ylabel 'ethernet transmit [Mbit/s]'
 set output '../plots/section1_v2/eth_tx.eps'
 
-plot container_file using 1:33:34 with yerrorbars title container ps 2, \
-  baremetal_file using 1:33:34 with yerrorbars title baremetal ps 2
+plot container_file using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title baremetal ps 2
 
 ! epstopdf ../plots/section1_v2/eth_tx.eps
 ! rm ../plots/section1_v2/eth_tx.eps
@@ -79,8 +79,32 @@ set title 'ethernet received'
 set ylabel 'ethernet received [Mbit/s]'
 set output '../plots/section1_v2/eth_rx.eps'
 
-plot container_file using 1:31:32 with yerrorbars title container ps 2, \
-  baremetal_file using 1:31:32 with yerrorbars title baremetal ps 2
+plot container_file using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title baremetal ps 2
 
 ! epstopdf ../plots/section1_v2/eth_rx.eps
 ! rm ../plots/section1_v2/eth_rx.eps
+
+
+#dropped samples
+set title 'dropped'
+set ylabel 'dropped samples'
+set output '../plots/section1_v2/dropped.eps'
+
+plot container_file using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"uhd_dropped mean":"uhd_dropped std" with yerrorbars title baremetal ps 2
+
+! epstopdf ../plots/section1_v2/dropped.eps
+! rm ../plots/section1_v2/dropped.eps
+
+
+#underflows samples
+set title 'underflows'
+set ylabel 'underflows samples'
+set output '../plots/section1_v2/underflows.eps'
+
+plot container_file using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title container ps 2, \
+  baremetal_file using 1:"uhd_underflows mean":"uhd_underflows std" with yerrorbars title baremetal ps 2
+
+! epstopdf ../plots/section1_v2/underflows.eps
+! rm ../plots/section1_v2/underflows.eps
