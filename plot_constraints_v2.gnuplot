@@ -75,5 +75,18 @@ plot for [name in containers] sprintf('../benchmark_log_1M_1U/bench%s_export_v3.
 ! rm ../plots/constraints_v2/underflows.eps
 
 
+# load diff samples
+set title 'load diff v1'
+set ylabel 'load diff in percent'
+set output '../plots/constraints_v2/load_diff.eps'
+
+plot for [name in containers] sprintf('../benchmark_log_1M_1U/bench%s_export_v3.csv', name) using 1:"load_diff mean":"load_diff std" with yerrorbars title name ps 2,
+
+
+! epstopdf ../plots/constraints_v2/load_diff.eps
+! rm ../plots/constraints_v2/load_diff.eps
+
+
+
 
 unset xrange

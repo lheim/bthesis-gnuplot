@@ -15,7 +15,7 @@ set key autotitle columnhead
 # legende verschieben
 set key top left
 
-set xrange [0:27]
+set xrange [0:35]
 
 set xlabel 'sample rate [Ms/s]'
 container = 'container name'
