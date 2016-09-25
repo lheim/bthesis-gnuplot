@@ -10,6 +10,15 @@ set grid
 set datafile separator comma
 set key autotitle columnhead
 
+# line styles
+set style line 1 lt 1 lc rgb "red" ps 2 pt 7
+set style line 2 lt 1 lc rgb "blue" ps 2 pt 90
+set style line 3 lt 1 lc rgb "orange" ps 2 pt 9
+set style line 4 lt 1 lc rgb '#66A61E' ps 2 pt 11
+set style line 5 lt 1 lc rgb '#66A61E' # dark lime green
+set style line 6 lt 1 lc rgb '#E6AB02' # dark banana
+set style line 7 lt 1 lc rgb '#A6761D' # dark tan
+set style line 8 lt 1 lc rgb '#666666' # dark gray
 
 
 # legende verschieben
@@ -17,7 +26,7 @@ set key top left
 
 
 
-set xlabel 'sample rate [Ms/s]'
+set xlabel 'Sample Rate [MS/s]'
 
 file = '../benchmark_log_1machine_4usrp/bench6_nolimit_export_v4.csv'
 
@@ -25,37 +34,40 @@ file = '../benchmark_log_1machine_4usrp/bench6_nolimit_export_v4.csv'
 
 
 set xrange [0:12]
+#################
+###USING THOSE###
+#################
 
 
 # received samples
-set title 'received v1'
-set ylabel 'received samples'
+set ylabel 'Number of Received Samples'
 set output '../plots/section3/received.eps'
 
-plot file using 1:"uhd_received 1 mean":"uhd_received 1 std" with yerrorbars title 'First Container' ps 2, \
-  file using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Second Container' ps 2, \
-  file using 1:"uhd_received 3 mean":"uhd_received 3 std" with yerrorbars title 'Third Container' ps 2, \
-  file using 1:"uhd_received 4 mean":"uhd_received 4 std" with yerrorbars title 'Fourth Container' ps 2
+plot file using 1:"uhd_received 1 mean" title 'First Container' ls 1, \
+  file using 1:"uhd_received 2 mean" title 'Second Container' ls 2, \
+  file using 1:"uhd_received 3 mean" title 'Third Container' ls 3, \
+  file using 1:"uhd_received 4 mean" title 'Fourth Container' ls 4
 
 ! epstopdf ../plots/section3/received.eps
 ! rm ../plots/section3/received.eps
 
 
 #transmitted samples
-set title 'transmitted'
-set ylabel 'transmitted samples'
+set ylabel 'Number of Transmitted Samples'
 set output '../plots/section3/transmitted.eps'
 
-plot file using 1:"uhd_transmitted 1 mean":"uhd_transmitted 1 std" with yerrorbars title 'First Container' ps 2, \
-  file using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Second Container' ps 2, \
-  file using 1:"uhd_transmitted 3 mean":"uhd_transmitted 3 std" with yerrorbars title 'Third Container' ps 2, \
-  file using 1:"uhd_transmitted 4 mean":"uhd_transmitted 4 std" with yerrorbars title 'Fourth Container' ps 2, \
+plot file using 1:"uhd_transmitted 1 mean" title 'First Container' ls 1, \
+  file using 1:"uhd_transmitted 2 mean" title 'Second Container' ls 2, \
+  file using 1:"uhd_transmitted 3 mean" title 'Third Container' ls 3, \
+  file using 1:"uhd_transmitted 4 mean" title 'Fourth Container' ls 4, \
 
 
 ! epstopdf ../plots/section3/transmitted.eps
 ! rm ../plots/section3/transmitted.eps
 
-
+############
+### STOP ###
+############
 
 
 #eth tx

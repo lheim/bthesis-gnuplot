@@ -10,14 +10,22 @@ set grid
 set datafile separator comma
 set key autotitle columnhead
 
-
+# line styles
+set style line 1 lt 1 lc rgb "red" ps 3 pt 7
+set style line 2 lt 1 lc rgb "blue" ps 3 pt 9
+set style line 3 lt 1 lc rgb "orange" ps 3 pt 13
+set style line 4 lt 1 lc rgb "green" ps 3 pt 5
+set style line 5 lt 1 lc rgb '#66A61E' # dark lime green
+set style line 6 lt 1 lc rgb '#E6AB02' # dark banana
+set style line 7 lt 1 lc rgb '#A6761D' # dark tan
+set style line 8 lt 1 lc rgb '#666666' # dark gray
 
 # legende verschieben
 set key top left
 
 
 
-set xlabel 'sample rate [Ms/s]'
+set xlabel 'Sample Rate [MS/s]'
 two_container = '2 container 1machine'
 
 #two_container_file1 = '../benchmark_log_2machine_2usrp/pc141/bench3_nolimit_1_export_v3.csv'
@@ -32,12 +40,11 @@ set xrange[0:30]
 
 
 # received samples
-set title 'received v1'
-set ylabel 'received samples'
+set ylabel 'Number of Received Samples'
 set output '../plots/section4_v2/received.eps'
 
-plot two_container_file1 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'First Container Machine 1' ps 2, \
-  two_container_file2 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'Second Container Machine 2' ps 2, \
+plot two_container_file1 using 1:"uhd_received mean" title 'First Container, First Host' ls 1, \
+  two_container_file2 using 1:"uhd_received mean" title 'Second Container, Second Host' ls 2, \
 
 
 ! epstopdf ../plots/section4_v2/received.eps
@@ -45,12 +52,11 @@ plot two_container_file1 using 1:"uhd_received mean":"uhd_received std" with yer
 
 
 #transmitted samples
-set title 'transmitted'
 set ylabel 'transmitted samples'
 set output '../plots/section4_v2/transmitted.eps'
 
-plot two_container_file1 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'First Container Machine 1' ps 2, \
-  two_container_file2 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'Second Container Machine 2' ps 2, \
+plot two_container_file1 using 1:"uhd_transmitted mean" title 'First Container, Host 1' ls 1, \
+  two_container_file2 using 1:"uhd_transmitted mean" title 'Second Container, Host 2' ls 2, \
 
 
 
@@ -59,7 +65,22 @@ plot two_container_file1 using 1:"uhd_transmitted mean":"uhd_transmitted std" wi
 
 
 
+#load diff
+set ylabel 'CPU load in %'
+set output '../plots/section4_v2/load_diff.eps'
 
+plot two_container_file1 using ($1-0.5):"load_diff mean":"load_diff std" with yerrorbars title 'Host 1' ls 1, \
+  two_container_file2 using ($1+0.5):"load_diff mean":"load_diff std" with yerrorbars title 'Host 2' ls 2
+
+
+! epstopdf ../plots/section4_v2/load_diff.eps
+! rm ../plots/section4_v2/load_diff.eps
+
+
+
+############
+### STOP ###
+############
 
 #eth tx
 set title 'ethernet transmit'
@@ -83,19 +104,6 @@ plot two_container_file2 using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" wi
 
 ! epstopdf ../plots/section4_v2/eth_rx.eps
 ! rm ../plots/section4_v2/eth_rx.eps
-
-
-#load diff
-set title 'load difference'
-set ylabel 'load difference'
-set output '../plots/section4_v2/load_diff.eps'
-
-plot two_container_file1 using 1:25:26 with yerrorbars title 'Machine 1' ps 2, \
-  two_container_file2 using 1:25:26 with yerrorbars title 'Machine 2' ps 2
-
-
-! epstopdf ../plots/section4_v2/load_diff.eps
-! rm ../plots/section4_v2/load_diff.eps
 
 
 

@@ -10,14 +10,30 @@ set grid
 set datafile separator comma
 set key autotitle columnhead
 
+# line styles for ColorBrewer Dark2
+# for use with qualitative/categorical data
+# provides 8 dark colors based on Set2
+# compatible with gnuplot >=4.2
+# author: Anna Schneider
+
+# line styles
+set style line 1 lt 1 lc rgb "red" ps 3 pt 7
+set style line 2 lt 1 lc rgb "blue" ps 3 pt 9
+set style line 3 lt 1 lc rgb "orange" ps 3 pt 13
+set style line 4 lt 1 lc rgb "green" ps 3 pt 5
+set style line 5 lt 1 lc rgb '#66A61E' # dark lime green
+set style line 6 lt 1 lc rgb '#E6AB02' # dark banana
+set style line 7 lt 1 lc rgb '#A6761D' # dark tan
+set style line 8 lt 1 lc rgb '#666666' # dark gray
 
 
+# END PALETTE
 # legende verschieben
 set key top left
 
 set xrange [0:35]
 
-set xlabel 'sample rate [Ms/s]'
+set xlabel 'Sample Rate [MS/s]'
 container = 'container name'
 baremetal = 'baremetal name'
 
@@ -25,42 +41,54 @@ baremetal = 'baremetal name'
 container_file = '../benchmark_log_1M_1U/bench9_nolimit_IP_export_v3.csv'
 baremetal_file = '../benchmark_log_baremetal_1U/baremetal_export_v3.csv'
 
+#################
+###USING THOSE###
+#################
 
 # received samples
-set title 'received v1'
-set ylabel 'received samples'
+set ylabel 'Number of Received Samples'
 set output '../plots/section1_v2/received.eps'
 
-plot container_file using 1:"uhd_received mean":"uhd_received std" with yerrorbars title container ps 2, \
-  baremetal_file using 1:"uhd_received mean":"uhd_received std" with yerrorbars title baremetal ps 2
+plot container_file using 1:"uhd_received mean" title 'containerized' ls 1, \
+  baremetal_file using 1:"uhd_received mean" title 'natively' ls 2
 
 
 ! epstopdf ../plots/section1_v2/received.eps
 ! rm ../plots/section1_v2/received.eps
 
+
 #transmitted samples
-set title 'transmitted'
-set ylabel 'transmitted samples'
+set ylabel 'Number of Transmitted Samples'
 set output '../plots/section1_v2/transmitted.eps'
 
-plot container_file using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title container ps 2, \
-  baremetal_file using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title baremetal ps 2
+plot container_file using 1:"uhd_transmitted mean" title 'containerized' ls 1, \
+  baremetal_file using 1:"uhd_transmitted mean" title 'natively' ls 2
 
 ! epstopdf ../plots/section1_v2/transmitted.eps
 ! rm ../plots/section1_v2/transmitted.eps
 
 
 #load diff
-set title 'load difference'
-set ylabel 'load difference'
+set xrange [0:27]
+
+set ylabel 'CPU load in %'
 set output '../plots/section1_v2/load_diff.eps'
 
-plot container_file using 1:"load_diff mean":"load_diff std" with yerrorbars title container ps 2, \
-  baremetal_file using 1:"load_diff mean":"load_diff std" with yerrorbars title baremetal ps 2
+plot container_file using ($1-0.5):"load_diff mean":"load_diff std" with yerrorbars title 'containerized' ls 1, \
+  baremetal_file using ($1+0.5):"load_diff mean":"load_diff std" with yerrorbars title 'natively' ls 2
 
 
 ! epstopdf ../plots/section1_v2/load_diff.eps
 ! rm ../plots/section1_v2/load_diff.eps
+
+
+
+############
+### STOP ###
+############
+
+set xrange [0:35]
+
 
 #eth tx
 set title 'ethernet transmit'

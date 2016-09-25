@@ -10,14 +10,29 @@ set grid
 set datafile separator comma
 set key autotitle columnhead
 
-
+set style line 1 lt 1 lc rgb "red" ps 2 pt 7
+set style line 2 lt 1 lc rgb "blue" ps 2 pt 90
+set style line 3 lt 1 lc rgb "orange" ps 2 pt 9
+set style line 4 lt 1 lc rgb '#66A61E' ps 2 pt 11
+set style line 5 lt 1 lc rgb '#66A61E' # dark lime green
+set style line 6 lt 1 lc rgb '#E6AB02' # dark banana
+set style line 7 lt 1 lc rgb '#A6761D' # dark tan
+set style line 8 lt 1 lc rgb '#666666' # dark gray
 
 # legende verschieben
 set key top left
 
+set colorsequence podo
+set style line 1 lt 1 lw 2 ps 2
+set style line 2 lt 2 lw 2 ps 2
+set style line 3 lt 3 lw 2 ps 2
+set style line 4 lt 4 lw 2 ps 2
+set style line 5 lt 5 lw 2 ps 2
+set style line 6 lt 6 lw 2 ps 2
 
 
-set xlabel 'sample rate [Ms/s]'
+
+set xlabel 'Sample Rate [MS/s]'
 two_container = '2 container 1machine'
 
 two_container_file1 = '../benchmark_log_2machine_4usrp/pc141/bench4_nolimit_1_1_export_v3.csv'
@@ -31,28 +46,26 @@ two_container_file2 = '../benchmark_log_2machine_4usrp/pc142/bench4_nolimit_2_1_
 set xrange [0:30]
 
 # received samples
-set title 'received v1'
-set ylabel 'received samples'
+set ylabel 'Number of Received Samples'
 set output '../plots/section5/received.eps'
 
-plot two_container_file1 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'First Container Machine 1' ps 2, \
-  two_container_file1 using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Second Container Machine 1' ps 2, \
-  two_container_file2 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'Third Container Machine 2' ps 2, \
-  two_container_file2 using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Fourth Container Machine 2' ps 2
+plot two_container_file1 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'First Container, Host 1' ls 1, \
+  two_container_file1 using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Second Container, Host 1' ls 2, \
+  two_container_file2 using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'Third Container, Host 2' ls 3, \
+  two_container_file2 using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Fourth Container, Host 2' ls 4
 
 ! epstopdf ../plots/section5/received.eps
 ! rm ../plots/section5/received.eps
 
 
 #transmitted samples
-set title 'transmitted'
-set ylabel 'transmitted samples'
+set ylabel 'Number of Transmitted Samples'
 set output '../plots/section5/transmitted.eps'
 
-plot two_container_file1 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'First Container Machine 1' ps 2, \
-  two_container_file1 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Second Container Machine 1' ps 2, \
-  two_container_file2 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'Third Container Machine 2' ps 2, \
-  two_container_file2 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Fourth Container Machine 2' ps 2
+plot two_container_file1 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'First Container, Host 1' ls 1, \
+  two_container_file1 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Second Container, Host 1' ls 2, \
+  two_container_file2 using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'Third Container, Host 2' ls 3, \
+  two_container_file2 using 1:"uhd_transmitted 2 mean":"uhd_transmitted 2 std" with yerrorbars title 'Fourth Container, Host 2' ls 4
 
 
 ! epstopdf ../plots/section5/transmitted.eps
