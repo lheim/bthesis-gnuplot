@@ -24,7 +24,13 @@ set style line 8 lt 1 lc rgb '#666666' # dark gray
 # legende verschieben
 set key top left
 
-
+set colorsequence podo
+set style line 1 lt 1 lw 3 ps 3
+set style line 2 lt 2 lw 3 ps 3
+set style line 3 lt 3 lw 2 ps 2
+set style line 4 lt 4 lw 2 ps 2
+set style line 5 lt 5 lw 2 ps 2
+set style line 6 lt 6 lw 2 ps 2
 
 set xlabel 'Sample Rate [MS/s]'
 two_container = '2 container 1machine'
@@ -45,8 +51,8 @@ set xrange [0:22]
 set ylabel 'Number of Received Samples'
 set output '../plots/section2_v2/received.eps'
 
-plot two_container_file using 1:"uhd_received mean" title 'First Container' ls 1, \
-  two_container_file using 1:"uhd_received 2 mean" title 'Second Container' ls 2
+plot two_container_file using 1:"uhd_received mean":"uhd_received std" with yerrorbars title 'First Container' ls 1, \
+  two_container_file using 1:"uhd_received 2 mean":"uhd_received 2 std" with yerrorbars title 'Second Container' ls 2
 
 ! epstopdf ../plots/section2_v2/received.eps
 ! rm ../plots/section2_v2/received.eps
@@ -56,8 +62,8 @@ plot two_container_file using 1:"uhd_received mean" title 'First Container' ls 1
 set ylabel 'Number of Transmitted Samples'
 set output '../plots/section2_v2/transmitted.eps'
 
-plot two_container_file using 1:"uhd_transmitted mean" title 'First Container' ls 1, \
-  two_container_file using 1:"uhd_transmitted 2 mean" title 'Second Container' ls 2
+plot two_container_file using 1:"uhd_transmitted mean":"uhd_transmitted std" with yerrorbars title 'First Container' ls 1, \
+  two_container_file using 1:"uhd_transmitted 2 mean":"uhd_transmitted std" with yerrorbars title 'Second Container' ls 2
 
 
 ! epstopdf ../plots/section2_v2/transmitted.eps

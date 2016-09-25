@@ -22,13 +22,15 @@ set style line 8 lt 1 lc rgb '#666666' # dark gray
 # legende verschieben
 set key top left
 
+
 set colorsequence podo
-set style line 1 lt 1 lw 2 ps 2
-set style line 2 lt 2 lw 2 ps 2
-set style line 3 lt 3 lw 2 ps 2
-set style line 4 lt 4 lw 2 ps 2
-set style line 5 lt 5 lw 2 ps 2
-set style line 6 lt 6 lw 2 ps 2
+set style line 1 lt 1 lw 3 ps 3
+set style line 2 lt 2 lw 3 ps 3
+set style line 3 lt 3 lw 3 ps 2 pt 5
+set style line 4 lt 4 lw 3 ps 3
+set style line 5 lt 5 lw 3 ps 3
+set style line 6 lt 6 lw 3 ps 3
+
 
 
 

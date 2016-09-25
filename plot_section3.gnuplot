@@ -24,11 +24,18 @@ set style line 8 lt 1 lc rgb '#666666' # dark gray
 # legende verschieben
 set key top left
 
+set colorsequence podo
+set style line 1 lt 1 lw 3 ps 3
+set style line 2 lt 2 lw 3 ps 3
+set style line 3 lt 3 lw 3 ps 2 pt 5
+set style line 4 lt 4 lw 3 ps 3
+set style line 5 lt 5 lw 3 ps 3
+set style line 6 lt 6 lw 3 ps 3
 
 
 set xlabel 'Sample Rate [MS/s]'
 
-file = '../benchmark_log_1machine_4usrp/bench6_nolimit_export_v4.csv'
+file = '../benchmark_log_1machine_4usrp/bench6S_nolimit_export_v4.csv'
 
 
 
