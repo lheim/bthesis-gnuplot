@@ -51,8 +51,8 @@ set xrange[0:30]
 set ylabel 'Number of Received Samples'
 set output '../plots/section4_v2/received.eps'
 
-plot two_container_file1 using 1:"uhd_received mean" title 'First Container, First Host' ls 1, \
-  two_container_file2 using 1:"uhd_received mean" title 'Second Container, Second Host' ls 2, \
+plot two_container_file1 using 1:"uhd_received mean" title 'First Container, Host 1' ls 1, \
+  two_container_file2 using 1:"uhd_received mean" title 'Second Container, Host 2' ls 2, \
 
 
 ! epstopdf ../plots/section4_v2/received.eps
@@ -60,7 +60,7 @@ plot two_container_file1 using 1:"uhd_received mean" title 'First Container, Fir
 
 
 #transmitted samples
-set ylabel 'transmitted samples'
+set ylabel 'Number of Transmitted Samples'
 set output '../plots/section4_v2/transmitted.eps'
 
 plot two_container_file1 using 1:"uhd_transmitted mean" title 'First Container, Host 1' ls 1, \

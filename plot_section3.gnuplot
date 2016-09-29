@@ -45,7 +45,23 @@ set xrange [0:12]
 ###USING THOSE###
 #################
 
+#transmitted samples
+set ylabel 'Number of Transmitted Samples'
+set output '../plots/section3/transmitted.eps'
+set yrange [] writeback
 
+plot file using 1:"uhd_transmitted 1 mean" title 'First Container' ls 1, \
+  file using 1:"uhd_transmitted 2 mean" title 'Second Container' ls 2, \
+  file using 1:"uhd_transmitted 3 mean" title 'Third Container' ls 3, \
+  file using 1:"uhd_transmitted 4 mean" title 'Fourth Container' ls 4, \
+
+
+
+! epstopdf ../plots/section3/transmitted.eps
+! rm ../plots/section3/transmitted.eps
+
+
+set yrange restore
 # received samples
 set ylabel 'Number of Received Samples'
 set output '../plots/section3/received.eps'
@@ -59,44 +75,33 @@ plot file using 1:"uhd_received 1 mean" title 'First Container' ls 1, \
 ! rm ../plots/section3/received.eps
 
 
-#transmitted samples
-set ylabel 'Number of Transmitted Samples'
-set output '../plots/section3/transmitted.eps'
+unset yrange
 
-plot file using 1:"uhd_transmitted 1 mean" title 'First Container' ls 1, \
-  file using 1:"uhd_transmitted 2 mean" title 'Second Container' ls 2, \
-  file using 1:"uhd_transmitted 3 mean" title 'Third Container' ls 3, \
-  file using 1:"uhd_transmitted 4 mean" title 'Fourth Container' ls 4, \
-
-
-! epstopdf ../plots/section3/transmitted.eps
-! rm ../plots/section3/transmitted.eps
-
-############
-### STOP ###
-############
-
-
+set xrange [0:8]
 #eth tx
-set title 'ethernet transmit'
-set ylabel 'ethernet transmit [Mbit/s]'
+set ylabel 'GbE Interface Transmission Rate [Mbit/s]'
 set output '../plots/section3/eth_tx.eps'
 
-plot file using 1:33:34 with yerrorbars title 'only machine' ps 2
+plot file using 1:33:34 with yerrorbars title 'Host running four containers' ls 1
 
   ! epstopdf ../plots/section3/eth_tx.eps
   ! rm ../plots/section3/eth_tx.eps
 
 
 #eth rx
-set title 'ethernet received'
-set ylabel 'ethernet received [Mbit/s]'
+set ylabel 'GbE Interface Receiving Rate [Mbit/s]'
 set output '../plots/section3/eth_rx.eps'
 
-plot file using 1:31:32 with yerrorbars title 'only machine' ps 2
+plot file using 1:31:32 with yerrorbars title 'Host running four containers' ls 1
 
 ! epstopdf ../plots/section3/eth_rx.eps
 ! rm ../plots/section3/eth_rx.eps
+
+############
+### STOP ###
+############
+
+
 
 
 #dropped samples

@@ -91,36 +91,33 @@ plot container_file using ($1-0.5):"load_diff mean":"load_diff std" with yerrorb
 ! rm ../plots/section1_v2/load_diff.eps
 
 
-
-############
-### STOP ###
-############
-
-set xrange [0:35]
+set xrange [0:27]
 
 
 #eth tx
-set title 'ethernet transmit'
-set ylabel 'ethernet transmit [Mbit/s]'
+set ylabel 'GbE Interface Transmission Rate [Mbit/s]'
 set output '../plots/section1_v2/eth_tx.eps'
 
-plot container_file using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title container ps 2, \
-  baremetal_file using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title baremetal ps 2
-
+plot container_file using 1:"tx_load (Mbits) mean":"tx_load (Mbits) std" with yerrorbars title 'Host running single container' ls 1
 ! epstopdf ../plots/section1_v2/eth_tx.eps
 ! rm ../plots/section1_v2/eth_tx.eps
 
 
 #eth rx
-set title 'ethernet received'
-set ylabel 'ethernet received [Mbit/s]'
+set ylabel 'GbE Interface Receiving Rate [Mbit/s]'
 set output '../plots/section1_v2/eth_rx.eps'
 
-plot container_file using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title container ps 2, \
-  baremetal_file using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title baremetal ps 2
-
+plot container_file using 1:"rx_load (Mbits) mean":"rx_load (Mbits) std" with yerrorbars title 'Host running single container' ls 1
 ! epstopdf ../plots/section1_v2/eth_rx.eps
 ! rm ../plots/section1_v2/eth_rx.eps
+
+
+
+############
+### STOP ###
+############
+
+
 
 
 #dropped samples

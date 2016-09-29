@@ -21,8 +21,6 @@ set style line 6 lt 1 lc rgb '#E6AB02' # dark banana
 set style line 7 lt 1 lc rgb '#A6761D' # dark tan
 set style line 8 lt 1 lc rgb '#666666' # dark gray
 
-# legende verschieben
-set key top left
 
 set colorsequence podo
 set style line 1 lt 1 lw 3 ps 3
@@ -40,12 +38,14 @@ one_container = '1 container 1machine'
 two_container_file = '../benchmark_log_1M_2U/bench8_nolimit_1_export_v3.csv'
 one_container_file = '../benchmark_log_1machine_1usrp_nop/bench_nolimit_nop_export_v3.csv'
 
+set key top left
 
 #################
 ###USING THOSE###
 #################
 
 set xrange [0:22]
+set yrange [0:220000000]
 
 # received samples
 set ylabel 'Number of Received Samples'
@@ -69,6 +69,25 @@ plot two_container_file using 1:"uhd_transmitted mean":"uhd_transmitted std" wit
 ! epstopdf ../plots/section2_v2/transmitted.eps
 ! rm ../plots/section2_v2/transmitted.eps
 
+unset yrange
+set xrange[0:15]
+#eth tx
+set ylabel 'GbE Interface Transmission Rate [Mbit/s]'
+set output '../plots/section2_v2/eth_tx.eps'
+
+plot two_container_file using 1:33:34 with yerrorbars title 'Host running two containers' ls 1
+! epstopdf ../plots/section2_v2/eth_tx.eps
+! rm ../plots/section2_v2/eth_tx.eps
+
+
+#eth rx
+set ylabel 'GbE Interface Receiving Rate [Mbit/s]'
+set output '../plots/section2_v2/eth_rx.eps'
+
+plot two_container_file using 1:31:32 with yerrorbars title 'Host running two containers' ls 1
+! epstopdf ../plots/section2_v2/eth_rx.eps
+! rm ../plots/section2_v2/eth_rx.eps
+
 
 ############
 ### STOP ###
@@ -81,28 +100,7 @@ plot two_container_file using 1:"uhd_transmitted mean":"uhd_transmitted std" wit
 
 #set xrange [0:15]
 
-#eth tx
-set title 'ethernet transmit'
-set ylabel 'ethernet transmit [Mbit/s]'
-set output '../plots/section2_v2/eth_tx.eps'
 
-plot two_container_file using 1:33:34 with yerrorbars title two_container ps 2, \
-  one_container_file using 1:33:34 with yerrorbars title one_container ps 2
-
-! epstopdf ../plots/section2_v2/eth_tx.eps
-! rm ../plots/section2_v2/eth_tx.eps
-
-
-#eth rx
-set title 'ethernet received'
-set ylabel 'ethernet received [Mbit/s]'
-set output '../plots/section2_v2/eth_rx.eps'
-
-plot two_container_file using 1:31:32 with yerrorbars title two_container ps 2, \
-  one_container_file using 1:31:32 with yerrorbars title one_container ps 2
-
-! epstopdf ../plots/section2_v2/eth_rx.eps
-! rm ../plots/section2_v2/eth_rx.eps
 
 
 
