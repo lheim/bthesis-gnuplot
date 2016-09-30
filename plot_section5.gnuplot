@@ -34,7 +34,7 @@ set style line 6 lt 6 lw 3 ps 3
 
 
 
-set xlabel 'Sample Rate [MS/s]'
+set xlabel 'Sample Rate [MSps]'
 two_container = '2 container 1machine'
 
 two_container_file1 = '../benchmark_log_2machine_4usrp/pc141/bench4_nolimit_1_1_export_v3.csv'

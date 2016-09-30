@@ -33,7 +33,7 @@ set style line 5 lt 5 lw 3 ps 3
 set style line 6 lt 6 lw 3 ps 3
 
 
-set xlabel 'Sample Rate [MS/s]'
+set xlabel 'Sample Rate [MSps]'
 
 file = '../benchmark_log_1machine_4usrp/bench6S_nolimit_export_v4.csv'
 

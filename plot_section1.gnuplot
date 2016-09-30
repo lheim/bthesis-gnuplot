@@ -42,7 +42,7 @@ set key top left
 
 set xrange [0:35]
 
-set xlabel 'Sample Rate [MS/s]'
+set xlabel 'Sample Rate [MSps]'
 container = 'container name'
 baremetal = 'baremetal name'
 

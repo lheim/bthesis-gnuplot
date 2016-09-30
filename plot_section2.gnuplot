@@ -30,7 +30,7 @@ set style line 4 lt 4 lw 2 ps 2
 set style line 5 lt 5 lw 2 ps 2
 set style line 6 lt 6 lw 2 ps 2
 
-set xlabel 'Sample Rate [MS/s]'
+set xlabel 'Sample Rate [MSps]'
 two_container = '2 container 1machine'
 one_container = '1 container 1machine'
 

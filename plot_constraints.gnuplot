@@ -24,7 +24,7 @@ set style line 5 lt 5 lw 3 ps 2 pt 13
 set style line 6 lt 6 lw 3 ps 3
 
 
-set xlabel 'Sample Rate [MS/s]'
+set xlabel 'Sample Rate [MSps]'
 
 
 containers = "CPU10perc CPU20perc 25CPU CPU50perc CPU80perc nolimit"
